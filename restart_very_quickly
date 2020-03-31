@@ -1,0 +1,72 @@
+# 这里是应该运行的各种充值，提币的脚本
+
+# 检查各种脚本进程
+kill -9 `ps -ef | grep monitor_server3_progress | awk '{print $2}'`
+nohup bundle exec ruby scripts/monitor_server3_progress.rb > log/monitor_server3_progress &
+
+# 同步K线
+kill -9 `ps -ef | grep sync_k_from_other_site | awk '{print $2}'`
+nohup bundle exec ruby scripts/sync_k_from_other_site.rb > log/sync_k_from_other_site &
+
+# 检查 btc 充值
+kill -9 `ps -ef | grep check_deposits_for_btc | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_deposits_for_btc.rb > log/check_deposits_for_btc &
+
+kill -9 `ps -ef | grep check_pending_deposits_for_btc | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_pending_deposits_for_btc.rb > log/check_pending_deposits_for_btc &
+
+# btc的提币
+kill -9 `ps -ef | grep check_withdraw_for_btc | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_withdraw_for_btc.rb > log/check_deposits_for_btc &
+
+# 检查 eth 充值
+kill -9 `ps -ef | grep check_deposits_for_eth | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_deposits_for_eth.rb > log/check_deposits_for_eth  &
+
+kill -9 `ps -ef | grep check_pending_deposits_for_eth | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_pending_deposits_for_eth.rb > log/check_pending_deposits_for_eth &
+
+# 检查 erc-20 充值
+kill -9 `ps -ef | grep check_deposits_for_erc20_token | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_deposits_for_erc20_token.rb > log/check_deposits_for_erc20_token &
+
+kill -9 `ps -ef | grep check_pending_deposits_for_erc_20_token | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_pending_deposits_for_erc_20_token.rb > log/check_pending_deposits_for_erc_20_token &
+
+# 把erc-20代币进行归拢
+kill -9 `ps -ef | grep put_deposits_together_for_erc_20_token | awk '{print $2}'`
+nohup bundle exec ruby scripts/put_deposits_together_for_erc_20_token.rb > log/put_deposits_together_for_erc_20_token &
+
+
+# ETH的提币
+kill -9 `ps -ef | grep check_withdraw_for_eth | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_withdraw_for_eth.rb > log/check_withdraw_for_eth &
+
+# ETH的归拢
+kill -9 `ps -ef | grep put_deposits_together_for_eth| awk '{print $2}'`
+nohup bundle exec ruby scripts/put_deposits_together_for_eth.rb > log/put_deposits_together_for_eth &
+
+# 为ETH的小钱包给零钱
+kill -9 `ps -ef | grep check_and_give_eth_to_eth_addresses | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_and_give_eth_to_eth_addresses.rb > log/check_and_give_eth_to_eth_addresses &
+
+
+# 检查usdt的充值
+kill -9 `ps -ef | grep check_deposits_for_usdt.rb| awk '{print $2}'`
+nohup bundle exec ruby scripts/check_deposits_for_usdt.rb > log/check_deposits_for_usdt &
+
+# usdt , 为每个小地址按时分派btc
+kill -9 `ps -ef | grep check_and_give_btc_to_usdt_addresses.rb | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_and_give_btc_to_usdt_addresses.rb > log/check_and_give_btc_to_usdt_addresses &
+
+# usdt的提币
+kill -9 `ps -ef | grep check_withdraw_for_usdt | awk '{print $2}'`
+nohup bundle exec ruby scripts/check_withdraw_for_usdt.rb > log/check_withdraw_for_usdt &
+
+# usdt 的归拢
+kill -9 `ps -ef | grep put_deposits_together_for_usdt| awk '{print $2}'`
+nohup bundle exec ruby scripts/put_deposits_together_for_usdt.rb > log/put_deposits_together_for_usdt &
+
+# 打新
+kill -9 `ps -ef | grep update_da_xin_sale_tokens | awk '{print $2}'`
+# nohup bundle exec ruby scripts/update_da_xin_sale_tokens.rb &

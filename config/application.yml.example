@@ -1,0 +1,94 @@
+defaults: &defaults
+
+  id_card_folder: /opt/app/admin.coiex.io/current
+
+  # by dashi
+  SITE_NAME: 'Coiex'
+  CAS_SERVER: http://cas.coiex.exchange
+  OTC_SERVER: http://otc.coiex.exchange
+
+  # 本站的域名
+  MAIN_SERVER: http://gly.coiex.exchange
+  URL_HOST: gly.coiex.exchange
+  URL_SCHEME: http
+
+  TIMEZONE: 'Beijing'
+
+  # Configuration variables for Redis.
+  REDIS_URL:      redis://172.31.12.247:6800
+  REDIS_PASSWORD: ~ # By default no password is sent to Redis server. Change this if you want to connect using password.
+  MATCHER_REDIS_URL: redis://localhost:6379/1
+
+  HUOBI_SECRET_KEY: b12389c0-136b36f0-204be7c6-9eae8
+  HUOBI_ACCESS_KEY: 4910cd4e-a624d311-e472af61-11d2e
+
+  # admin role account
+  ADMIN: 'shensiwei.com@gmail.com, admin@coiex.io'
+
+  FORCE_SECURE_CONNECTION: 'true' # Set to "true" to disable access via unsecured HTTP, send HSTS headers and use secure cookies.
+
+  # session expire time (seconds)
+  SESSION_EXPIRE: '60'
+
+  # 记得这里，可能要设置IP白名单
+  SMS_URL: 'https://sms.yunpian.com/v1/sms/send.json'
+  SMS_KEY: '8624605179da4345750c02c4c2023fa6'
+  SMS_SIGNATURE: BIT科技
+
+
+  # 使用的ETH node 服务器
+  ETH_RPC_SERVER: 'http://172.31.12.248:8800'
+  # 检测提币相关, 每次检测一个账户, 人数少的时候 , 需要睡眠的时间. > 1000用户的时候就干掉. etherscan的访问次数是 < 5req/s
+  # 更多用户的时候, 使用多个机器(不同IP) 和不同的key来跑
+  CHECK_ETH_DEPOSIT_SLEEP_TIME: '60'
+  # 截止到 2018-5-18 , 高度是 5632191. 所以我们取 5600000 高度即可
+  CHECK_ETH_DEPOSIT_START_BLOCK: '5600000'
+  CHECK_ETH_DEPOSIT_ETHERSCAN_API_KEY: '4ANBPF8KQQHJ6J9BBU7WU53BNPDMXHYJMW'
+  CHECK_ETH_CONFIRMATION_COUNT: '12'
+
+  # 每10秒检查一次
+  CHECK_ETH_WITHDRAW_SLEEP_TIME: '10'
+
+  # 公司的热钱包, 要保证里面有ETH, TAC
+  #CHECK_ETH_WITHDRAW_COINBASE: '0x64fFA42DbaE83fE9bea08898D4FD156d478a8C83'
+  #CHECK_ETH_WITHDRAW_COINBASE_PASSWORD: 'pjQRiI2qGbtjlPY+shM@FJJRToAWEL/gj9fyGQuXy6s$gRt/i8KJ44iVB4b%fn6I'
+
+  CHECK_ETH_WITHDRAW_COINBASE: '0x925ccd95f17640be707c4c8ae713177dfc91ce7e'
+  CHECK_ETH_WITHDRAW_COINBASE_PASSWORD: '$howmethemoney66'
+
+
+  # 每1分钟检查一次 BTC 充值
+  CHECK_BTC_EACH_ADDRESS_SLEEP_TIME: '12'
+  CHECK_BTC_DEPOSIT_SLEEP_TIME: '60'
+  CHECK_BTC_CONFIRMATION_COUNT: '12'
+  BTC_RPC_URL: 'http://coiex:levelUP8899@47.92.132.138:8332'
+
+  # USDT 充值
+  CHECK_USDT_EACH_ADDRESS_SLEEP_TIME: '12'
+  CHECK_USDT_DEPOSIT_SLEEP_TIME: '60'
+  CHECK_USDT_CONFIRMATION_COUNT: '12'
+  USDT_COIN_BASE: '1A4spg8hES1hUddtKQF6x16z5mi6BrjXp3'
+  USDT_RPC_URL: 'http://coiex:levelUP888@39.104.58.1:8332'
+
+  #
+  SMTP_ADDRESS:             smtp.gmail.com
+  SMTP_PORT:                '587'
+  SMTP_USERNAME:            greatcoiex@gmail.com
+  SMTP_PASSWORD:            daydayUP888
+  SMTP_AUTHENTICATION_TYPE: plain # Can be plain, login or cram_md5.
+  #  SMTP_USE_SSL:             true
+  SMTP_DOMAIN: 'coiex.io'
+  SMTP_ENABLE_STARTTLS_AUTO: 'true'
+
+  # Configuration variables for appearance.
+  LOGO_URL:  'http://siweitech.b0.upaiyun.com//image/702/coiex-logo.png'
+
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -1,0 +1,22 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  collation: utf8_general_ci
+  pool: 5
+  host: localhost
+  username: root
+  password:
+
+development:
+  <<: *default
+  database: coiex
+
+test:
+  <<: *default
+  database: coiex_test
+
+production:
+  <<: *default
+  url: 'mysql2://root:@localhost:3306/coiex?pool=10&timeout=3000'
+  pool: 10
+  database: coiex
