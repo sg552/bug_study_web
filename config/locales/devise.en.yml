@@ -1,60 +1,6 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
 en:
-  password:
-    forget: 'Forgot your password?'
-  email:
-    hi: Hi
-    welcome_text: Welcome to Coiex!
-    confirm_text: You can confirm your account email through the link below, after that, you can use Coiex normally
-    confirm: Confirm my account
-    changing_email_to: We're contacting you to notify you that your email is being changed to
-    password_changed: We're contacting you to notify you that your password has been changed.
-    change_password_text: Someone has requested a link to change your password. You can do this through the link below.
-    change_password_link: Change my password
-    change_password_text2: If you didn't request this, please ignore this email. <br/> Your password won't change until you access the link above and create a new one.
-    lock_text: Your account has been locked due to an excessive number of unsuccessful sign in attempts.
-    unlock_text: "Click the link below to unlock your account:"
-    unlock_link: Unlock my account
-
-
-  confirmation:
-    title: Email Confirmation
-    sign_up: Sign Up
-    submit: Submit
-  activerecord:
-    errors:
-      models:
-        member:
-          attributes:
-            confirmation_token:
-              blank: 'must not be blank'
-              invalid: 'incorrect'
-    attributes:
-      user:
-        confirmation_sent_at: Confirmation sent at
-        confirmation_token: Confirmation token
-        confirmed_at: Confirmed at
-        created_at: Created at
-        current_password: Current password
-        current_sign_in_at: Current sign in at
-        current_sign_in_ip: Current sign in IP
-        email: Email
-        encrypted_password: Encrypted password
-        failed_attempts: Failed attempts
-        last_sign_in_at: Last sign in at
-        last_sign_in_ip: Last sign in IP
-        locked_at: Locked at
-        password: Password
-        password_confirmation: Password confirmation
-        remember_created_at: Remember created at
-        remember_me: Remember me
-        reset_password_sent_at: Reset password sent at
-        reset_password_token: Reset password token
-        sign_in_count: Sign in count
-        unconfirmed_email: Unconfirmed email
-        unlock_token: Unlock token
-        updated_at: Updated at
-    models:
-      user: User
   devise:
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
@@ -107,11 +53,6 @@ en:
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
   errors:
-    models:
-      member:
-        attributes:
-          confirmation_token:
-            blank: 'Email must not be blank.'
     messages:
       already_confirmed: "was already confirmed, please try signing in"
       confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
