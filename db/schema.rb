@@ -11,33 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200331100231) do
+ActiveRecord::Schema.define(version: 20200331103741) do
 
   create_table "bugs", force: :cascade do |t|
-    t.text     "wybug_id",             limit: 4294967295
-    t.text     "wybug_title",          limit: 4294967295
-    t.text     "wybug_corp",           limit: 4294967295
-    t.text     "wybug_author",         limit: 4294967295
-    t.string   "wybug_date",           limit: 255
-    t.string   "wybug_open_date",      limit: 255
-    t.string   "wybug_type",           limit: 255
-    t.string   "wybug_level",          limit: 255
-    t.string   "wybug_rank_0",         limit: 255
-    t.text     "wybug_status",         limit: 4294967295
-    t.text     "wybug_from",           limit: 4294967295
-    t.text     "wybug_tags",           limit: 4294967295
-    t.text     "wybug_detail",         limit: 4294967295
-    t.text     "wybug_reply",          limit: 4294967295
-    t.text     "replys",               limit: 4294967295
-    t.string   "wybug_level_fromcorp", limit: 255
-    t.integer  "wybug_rank_fromcorp",  limit: 4
-    t.integer  "Ranks",                limit: 4
-    t.boolean  "is_viewed",                               default: false
-    t.datetime "viewed_at"
-    t.text     "comment",              limit: 65535
+    t.text    "wybug_id",             limit: 4294967295
+    t.text    "wybug_title",          limit: 4294967295
+    t.text    "wybug_corp",           limit: 4294967295
+    t.text    "wybug_author",         limit: 4294967295
+    t.string  "wybug_date",           limit: 255
+    t.string  "wybug_open_date",      limit: 255
+    t.string  "wybug_type",           limit: 255
+    t.string  "wybug_level",          limit: 255
+    t.string  "wybug_rank_0",         limit: 255
+    t.text    "wybug_status",         limit: 4294967295
+    t.text    "wybug_from",           limit: 4294967295
+    t.text    "wybug_tags",           limit: 4294967295
+    t.text    "wybug_detail",         limit: 4294967295
+    t.text    "wybug_reply",          limit: 4294967295
+    t.text    "replys",               limit: 4294967295
+    t.string  "wybug_level_fromcorp", limit: 255
+    t.integer "wybug_rank_fromcorp",  limit: 4
+    t.integer "Ranks",                limit: 4
   end
 
   add_index "bugs", ["wybug_id"], name: "bugs_wybug_id", type: :fulltext
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "bug_id",     limit: 4
+    t.integer  "user_id",    limit: 4
+    t.text     "comment",    limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

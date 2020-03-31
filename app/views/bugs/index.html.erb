@@ -16,7 +16,9 @@
     <td style='width: 130px'>阅读时间</td>
     <td style='width: '>我的笔记</td>
   </tr>
-<% @bugs.each do |bug| %>
+  <% @bugs.each do |bug|
+    comment = bug.comments.where('user_id = ?', current_user.id).try(:first)
+%>
   <tr>
     <td><%= bug.id %> </td>
     <td><%= bug.wybug_id%> </td>
@@ -24,6 +26,8 @@
     <td><%= bug.wybug_date %> </td>
     <td><%= bug.wybug_type %> </td>
     <td><%= bug.wybug_rank_0 %> </td>
+    <td><%= comment.try :created_at %> </td>
+    <td><%= comment.try :comment %> </td>
   </tr>
 <% end %>
 </table>
