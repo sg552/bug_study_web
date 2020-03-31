@@ -22,7 +22,7 @@
   <tr>
     <td><%= bug.id %> </td>
     <td><%= bug.wybug_id%> </td>
-    <td><%= bug.wybug_title %> </td>
+    <td><%= link_to bug.wybug_title, bug, target: '_blank' %> </td>
     <td><%= bug.wybug_date %> </td>
     <td><%= bug.wybug_type %> </td>
     <td><%= bug.wybug_rank_0 %> </td>

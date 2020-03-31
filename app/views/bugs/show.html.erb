@@ -1,0 +1,27 @@
+
+<%= @bug.wybug_title %>   <br/>
+<%= @bug.wybug_status %> <br/>
+<%= @bug.wybug_date %> <br/>
+<%
+    content = @bug.wybug_detail.sub('>', '')
+%>
+<%= raw content %>
+
+<%
+    replies = @bug.wybug_reply.sub('>', '')
+%>
+
+<hr/>
+<% if @comment.id.present? %>
+  学习时间:  <%= @comment.created_at.strftime "%Y-%m-%d %H:%M:%S" %>
+<% else %>
+  尚未学习
+<% end %>
+<%= form_for @comment do |f| %>
+  <%= hidden_field_tag "[comment][user_id]", current_user.id %>
+  <%= hidden_field_tag "[comment][bug_id]", params[:id] %>
+  <%= f.text_area :comment, style: "height: 50px; width: 100%" %> <br/>
+  <%= f.submit "记笔记"%>
+<% end %>
+<hr/>
+<%= raw replies %>

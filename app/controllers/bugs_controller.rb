@@ -9,4 +9,12 @@ class BugsController < ApplicationController
     @bugs = @bugs.order(params[:order_by])
     @bugs = @bugs.page(params[:page]).per(100)
   end
+
+  def show
+    @bug = Bug.find params[:id]
+    @comment = @bug.comments.where("user_id = ?", current_user.id).first
+    if @comment.blank?
+      @comment = Comment.new bug_id: params[:id], user_id: current_user.id
+    end
+  end
 end
