@@ -1,0 +1,29 @@
+<%= form_tag '' , method: :get do %>
+  标题: <%= text_field_tag :title, params[:titile] %>
+  bug等级大于: <%= text_field_tag :bug_rank_greater_than, params[:bug_rank_greater_than], placeholder: '二选一', style: 'width: 50px' %>
+  bug等级等于: <%= select_tag :bug_rank, options_for_select((0..20).to_a.reverse, params[:bug_rank]), style: 'width: 50px' %>
+  <%= submit_tag "提交" %>
+<% end %>
+<%= paginate @bugs %>  合计: <%=  @bugs_count %>
+<table style='table-layout: fixed; width: 100%'>
+  <tr>
+    <td style='width: 50px'>id </td>
+    <td style='width: 180px'>乌云id </td>
+    <td style='width: 600px'>标题 </td>
+    <td style='width: 130px'>原始时间 </td>
+    <td style='width: 200px'>bug类型</td>
+    <td style='width: 50px'>等级</td>
+    <td style='width: 130px'>阅读时间</td>
+    <td style='width: '>我的笔记</td>
+  </tr>
+<% @bugs.each do |bug| %>
+  <tr>
+    <td><%= bug.id %> </td>
+    <td><%= bug.wybug_id%> </td>
+    <td><%= bug.wybug_title %> </td>
+    <td><%= bug.wybug_date %> </td>
+    <td><%= bug.wybug_type %> </td>
+    <td><%= bug.wybug_rank_0 %> </td>
+  </tr>
+<% end %>
+</table>

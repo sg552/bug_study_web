@@ -17,42 +17,6 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
 
-  config.action_mailer.delivery_method     = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              ENV['SMTP_ADDRESS'],
-    port:                 ENV['SMTP_PORT'],
-    user_name:            ENV['SMTP_USERNAME'],
-    password:             ENV['SMTP_PASSWORD'],
-    authentication:       ENV['SMTP_AUTHENTICATION_TYPE'],
-    domain:               ENV['SMTP_DOMAIN'],
-    ssl:                  ENV['SMTP_USE_SSL'],
-    tls:                  ENV['SMTP_USE_TLS'],
-    openssl_verify_mode:  ENV['SMTP_OPENSSL_VERIFY_MODE'],
-    enable_starttls:      ENV['SMTP_ENABLE_STARTTLS'],
-    enable_starttls_auto: ENV['SMTP_ENABLE_STARTTLS_AUTO'],
-    open_timeout:         ENV['SMTP_OPEN_TIMEOUT'],
-    read_timeout:         ENV['SMTP_READ_TIMEOUT']
-  }.compact.tap do |options|
-
-    # Typecast several options to integers.
-    %i[ port open_timeout read_timeout ].each do |option|
-      options[option] = options[option].to_i if options.key?(option)
-    end
-
-    # Typecast several options to booleans.
-    %i[ ssl tls enable_starttls enable_starttls_auto ].each do |option|
-      if options.key?(option)
-        options[option] = options[option] == 'true' ? true : false
-      end
-    end
-
-    # Enable mailer only if variables are defined in environment.
-  end if ENV.key?('SMTP_ADDRESS') && ENV.key?('SMTP_PORT')
-  config.action_mailer.default_url_options = {
-    host: ENV['URL_HOST'],
-    protocol: ENV['URL_SCHEME']
-  }
-
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
@@ -74,6 +38,4 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-
-  config.action_mailer.default_url_options = { host: "#{ENV['URL_SCHEME']}://#{ENV['URL_HOST']}", port: 80}
 end
