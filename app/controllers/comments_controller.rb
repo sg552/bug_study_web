@@ -9,6 +9,10 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @comment = Comment.find params[:id]
+    @comment.comment = params[:comment][:comment]
+    @comment.save!
+    redirect_to :back, notice: 'ok'
   end
 
   def comment_params
