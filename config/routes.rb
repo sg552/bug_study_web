@@ -3,4 +3,9 @@ Rails.application.routes.draw do
   resources :bugs
   resources :comments
   root 'bugs#index'
+  namespace :api do
+    resources :bugs do
+      post :update_comment
+    end
+  end
 end
