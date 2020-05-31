@@ -36,6 +36,13 @@ module API
     def show
       @bug = Bug.find params[:id]
       @bug.wybug_detail = @bug.wybug_detail.gsub('width="600"', 'width="100%"')
+        .gsub("<pre><code>", "<p>")
+        .gsub("</code></pre>", "</p>")
+        .gsub('<fieldset class="fieldset fieldset-code">', "")
+        .gsub("</fieldset>", "")
+      if @bug.wybug_detail.match(/^>\t/)
+        @bug.wybug_detail = @bug.wybug_detail.sub(">\t", '')
+      end
       result = @bug.to_json
       render json: @bug.to_json
     end
