@@ -1,5 +1,6 @@
 source 'https://gems.ruby-china.com'
 
+gem 'thin', '1.7.2'
 gem 'log4r', '1.1.9'
 gem 'jquery-rails'
 
