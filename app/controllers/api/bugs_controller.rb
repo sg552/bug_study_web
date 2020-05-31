@@ -43,8 +43,25 @@ module API
       if @bug.wybug_detail.match(/^>\t/)
         @bug.wybug_detail = @bug.wybug_detail.sub(">\t", '')
       end
-      result = @bug.to_json
-      render json: @bug.to_json
+      result = {
+        id: params[:id],
+        wybug_id: @bug.wybug_id,
+        wybug_author: @bug.wybug_author,
+        wybug_rank_0: @bug.wybug_rank_0,
+        wybug_level: @bug.wybug_level,
+        wybug_title: @bug.wybug_title,
+        wybug_type: @bug.wybug_type,
+        wybug_detail: @bug.wybug_detail,
+        wybug_reply: @bug.wybug_reply,
+        replys: @bug.replys
+      }
+
+      comments = Comment.where("bug_id = ? and user_id = ?", params[:id], params[:user_id])
+      if comments.present?
+        comment = comments.first
+        result = result.merge comment: comment.comment, comment_updated_at: comment.updated_at
+      end
+      render json: result
     end
 
     def update_comment
