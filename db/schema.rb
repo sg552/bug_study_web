@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200331103741) do
+ActiveRecord::Schema.define(version: 20200601074059) do
 
   create_table "bugs", force: :cascade do |t|
     t.text    "wybug_id",             limit: 4294967295
@@ -39,10 +39,13 @@ ActiveRecord::Schema.define(version: 20200331103741) do
   create_table "comments", force: :cascade do |t|
     t.integer  "bug_id",     limit: 4
     t.integer  "user_id",    limit: 4
-    t.text     "comment",    limit: 65535
+    t.text     "comment",    limit: 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "comments", ["bug_id"], name: "index_comments_on_bug_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
