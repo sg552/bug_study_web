@@ -2,22 +2,22 @@ module API
   class BugsController < ActionController::Base
     def index
       params[:order_by] ||= 'bugs.id desc'
-      @bugs = Bug.includes(:comments).joins(:comments)
-      @bugs = @bugs.where('wybug_title like ?', "%#{params[:title]}%") if params[:title].present?
-      @bugs = @bugs.where('wybug_rank_0 > ?', params[:bug_rank_greater_than]) if params[:bug_rank_greater_than].present?
-      @bugs = @bugs.where('wybug_rank_0 = ?', params[:bug_rank]) if params[:bug_rank].present? && params[:bug_rank_greater_than].blank?
+      #@bugs = Bug.includes(:comments).joins(:comments)
+      @bugs = Bug.joins("left outer join comments on comments.bug_id = bugs.id")
+      #@bugs = @bugs.where('wybug_title like ?', "%#{params[:title]}%") if params[:title].present?
+      #@bugs = @bugs.where('wybug_rank_0 > ?', params[:bug_rank_greater_than]) if params[:bug_rank_greater_than].present?
+      #@bugs = @bugs.where('wybug_rank_0 = ?', params[:bug_rank]) if params[:bug_rank].present? && params[:bug_rank_greater_than].blank?
 
       # 查看学习过的
       if params[:user_id].present? && params[:is_studied].present?
         if params[:is_studied] == '1'
-          @bugs = @bugs.where("comments.id is not null")
-          #@bugs = @bugs.order('comments.id desc')
+          @bugs = @bugs.where("comments.user_id = ? and comments.id is not null", params[:user_id])
+          @bugs = @bugs.order('comments.id desc')
         else
-          @bugs = @bugs.where("comments.id is null")
-          #@bugs = @bugs.order(params[:order_by])
+          @bugs = @bugs.where("comments.id is null", params[:user_id])
+          @bugs = @bugs.order(params[:order_by])
         end
       end
-      @bugs = @bugs.order(params[:order_by])
       @bugs = @bugs.page(params[:page]).per(100)
       @bugs_count = @bugs.count
       render json: {
@@ -27,7 +27,8 @@ module API
             title: bug.wybug_title,
             date: bug.wybug_date,
             type: bug.wybug_type,
-            rank: bug.wybug_rank_0
+            rank: bug.wybug_rank_0,
+            commented_at: (bug.comments.first.created_at rescue '')
           }
         }
       }
