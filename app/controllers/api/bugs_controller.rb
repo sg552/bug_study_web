@@ -66,6 +66,8 @@ module API
       if @bug.wybug_detail.match(/^>\t/)
         @bug.wybug_detail = @bug.wybug_detail.sub(">\t", '')
       end
+
+      comments = Comment.where('bug_id = ? and user_id = ?', params[:id], params[:user_id])
       result = {
         id: params[:id],
         wybug_id: @bug.wybug_id,
@@ -76,14 +78,10 @@ module API
         wybug_type: @bug.wybug_type,
         wybug_detail: @bug.wybug_detail,
         wybug_reply: @bug.wybug_reply,
-        replys: @bug.replys
+        replys: @bug.replys,
+        comment:(comments.first.comment rescue '')
       }
 
-      comments = Comment.where("bug_id = ? and user_id = ?", params[:id], params[:user_id])
-      if comments.present?
-        comment = comments.first
-        result = result.merge comment: comment.comment, comment_updated_at: comment.updated_at
-      end
       render json: result
     end
 
