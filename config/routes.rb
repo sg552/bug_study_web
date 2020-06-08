@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     resources :bugs do
       collection do
         post :update_comment
-        #post :update_bookmark
+        get :bookmarks
+        post :update_bookmark
       end
     end
   end

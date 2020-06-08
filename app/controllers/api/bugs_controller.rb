@@ -37,6 +37,25 @@ module API
       }
     end
 
+    def bookmarks
+      @bugs = Bug.joins(:bookmarks).where('bookmarks.user_id = ?', params[:user_id])
+        .order("bookmarks.id desc")
+        .limit(1000)
+      render json: {
+        result: @bugs.map{|bug|
+          {
+            id: bug.id,
+            title: bug.wybug_title,
+            date: bug.wybug_date,
+            type: bug.wybug_type,
+            rank: bug.wybug_rank_0,
+            commented_at: ''
+          }
+        }
+      }
+    end
+
+
     def show
       @bug = Bug.find params[:id]
       @bug.wybug_detail = @bug.wybug_detail.gsub('width="600"', 'width="100%"')
@@ -70,8 +89,9 @@ module API
 
     def update_comment
       @bug = Bug.find params[:id]
-      if @bug.comments.present?
-        @comment = @bug.comments.first
+      comments = Comment.where('bug_id = ? and user_id = ?', params[:id], params[:user_id])
+      if comments.present?
+        @comment = comments.first
       else
         @comment = Comment.new bug_id: params[:id], user_id: params[:user_id]
       end
@@ -83,6 +103,22 @@ module API
       render json: {
         result: 'success',
         next_bug_id: next_bug_id
+      }
+    end
+
+    def update_bookmark
+      @bug = Bug.find params[:id]
+      bookmarks = Bookmark.where('bug_id = ? and user_id = ?', params[:id], params[:user_id])
+
+      if bookmarks.present?
+        @bookmark = bookmarks.first
+      else
+        @bookmark = Bookmark.new bug_id: params[:id], user_id: params[:user_id]
+      end
+      @bookmark.save!
+
+      render json: {
+        result: 'success'
       }
     end
   end

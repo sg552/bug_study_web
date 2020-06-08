@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200601074059) do
+ActiveRecord::Schema.define(version: 20200608111309) do
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer  "bug_id",     limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bugs", force: :cascade do |t|
     t.text    "wybug_id",             limit: 4294967295
