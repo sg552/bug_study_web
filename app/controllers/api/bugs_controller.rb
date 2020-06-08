@@ -10,16 +10,19 @@ module API
 
       # 查看学习过的
       if params[:user_id].present? && params[:is_studied].present?
+
+        # studied_bugs
+        @bugs = @bugs.where("comments.user_id = ? and comments.id is not null", params[:user_id])
+          .group('bugs.id')
         if params[:is_studied] == '1'
-          @bugs = @bugs.where("comments.user_id = ? and comments.id is not null", params[:user_id])
           @bugs = @bugs.order('comments.id desc')
         else
-          @bugs = @bugs.where("comments.id is null", params[:user_id])
+          @not_studied_bugs = Bug.where.not(id: @bugs.map(&:id))
+          @bugs = @not_studied_bugs
           @bugs = @bugs.order(params[:order_by])
         end
       end
       @bugs = @bugs.page(params[:page]).per(100)
-      @bugs_count = @bugs.count
       render json: {
         result: @bugs.map{|bug|
           {
