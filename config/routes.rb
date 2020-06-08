@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   root 'bugs#index'
   namespace :api do
     resources :bugs do
-      post :update_comment
+      collection do
+        post :update_comment
+        #post :update_bookmark
+      end
     end
   end
 end

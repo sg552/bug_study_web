@@ -67,14 +67,20 @@ module API
 
     def update_comment
       @bug = Bug.find params[:id]
-      if @bug.comment.present?
-        @comment = @bug.comment
+      if @bug.comments.present?
+        @comment = @bug.comments.first
       else
         @comment = Comment.new bug_id: params[:id], user_id: params[:user_id]
       end
       @comment.comment = params[:comment]
       @comment.save!
-      render json: { result: 'success'}
+
+      next_bug_id = Bug.where('id < ?', params[:id]).order('id desc').first.id
+
+      render json: {
+        result: 'success',
+        next_bug_id: next_bug_id
+      }
     end
   end
 end
