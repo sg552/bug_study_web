@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         post :update_comment
         get :bookmarks
         post :update_bookmark
+        get :validate_login
       end
     end
   end

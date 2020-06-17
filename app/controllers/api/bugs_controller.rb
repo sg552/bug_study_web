@@ -119,5 +119,15 @@ module API
         result: 'success'
       }
     end
+
+    def validate_login
+      begin
+        user = User.find_by_email params[:email]
+        result = user.valid_password?(params[:password]) ? 'ok' : 'error'
+      rescue
+        result = 'error'
+      end
+      render text: result
+    end
   end
 end
