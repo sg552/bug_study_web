@@ -123,11 +123,17 @@ module API
     def validate_login
       begin
         user = User.find_by_email params[:email]
-        result = user.valid_password?(params[:password]) ? 'ok' : 'error'
+        result = user.valid_password?(params[:password])
       rescue
-        result = 'error'
+        result = false
       end
-      render text: result
+
+      user_id = result ? user.id : 0
+
+      render json: {
+        result:(result ? "success" : "error"),
+        user_id: user_id
+      }
     end
   end
 end
