@@ -43,6 +43,9 @@ $ git clone https://github.com/sg552/bug_study_web.git
 
 登录后使用
 
-demo:  http://shentou.sweetysoft.com
-user: demo@shentou.com
-password:  123456
+- demo:  http://shentou.sweetysoft.com
+- user: demo@shentou.com
+- password:  123456
+
+![图片](https://user-images.githubusercontent.com/234533/145322223-72fb41a7-ff70-4e46-a0b6-891e518be8bf.png)
+
