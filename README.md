@@ -49,3 +49,8 @@ $ git clone https://github.com/sg552/bug_study_web.git
 
 ![图片](https://user-images.githubusercontent.com/234533/145322223-72fb41a7-ff70-4e46-a0b6-891e518be8bf.png)
 
+![图片](https://user-images.githubusercontent.com/234533/145322300-2a96dc1c-5325-4b29-9bc1-cd62c6c80387.png)
+
+![图片](https://user-images.githubusercontent.com/234533/145322330-bf732d55-4c8e-4bff-b530-93169c6eaf79.png)
+
+
